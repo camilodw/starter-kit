@@ -111,8 +111,8 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         $notification = array(
-            'message' => 'Se actualizó los datos correctamente',
-            'alert-type' => 'success',
+            'message'       => 'Se actualizó los datos correctamente',
+            'alert-type'    => 'success',
         );
         return Redirect()->route('users.index')->with($notification);
 
