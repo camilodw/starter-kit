@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\Role\UpdateRequest;
+use App\Http\Requests\Role\StoreRequest;
 class RoleController extends Controller
 {
     /**
@@ -46,13 +47,8 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $this->validate($request, [
-            'name'          => 'required|unique:roles,name',
-            'permission'    => 'required',
-        ]);
-
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
