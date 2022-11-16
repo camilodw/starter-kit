@@ -54,7 +54,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+            ->with('success', 'Usuario creado exitosamente');
     }
 
     /**
@@ -63,8 +63,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $user = User::find($id);
+    public function show(User $user) {
         return view('dashboard.users.show', compact('user'));
     }
 
@@ -74,8 +73,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        $user       = User::find($id);
+    public function edit(User $user) {
         $roles      = Role::pluck('name', 'name')->all();
         $userRole   = $user->roles->pluck('name', 'name')->all();
 
@@ -127,7 +125,7 @@ class UserController extends Controller
     public function destroy($id) {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Usuario eliminado exitosamente');
     }
 
     public function changePassword(){
