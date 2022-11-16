@@ -40,7 +40,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 @can('delete role')
-                                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-sm"><i class="fas fa-trash fa-lg"></i></button>
+                                                    <button type="submit" onclick="return confirm('¿Estás seguro de eliminar el rol?');" class="btn btn-sm"><i class="fas fa-trash fa-lg"></i></button>
                                                 @endcan
                                             </form>
 

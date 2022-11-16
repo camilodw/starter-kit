@@ -39,13 +39,13 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Password:</strong>
+                            <strong>Contraseña:</strong>
                             {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Confirm Password:</strong>
+                            <strong>Confirmar contraseña:</strong>
                             {!! Form::password('confirm-password', array('placeholder' => 'Confirmar Password','class' => 'form-control')) !!}
                         </div>
                     </div>

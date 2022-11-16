@@ -53,7 +53,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 @can('delete user')
-                                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this item?');" class="btn"><i class="fas fa-trash fa-lg"></i></button>
+                                                    <button type="submit" onclick="return confirm('¿Estás seguro de eliminar este usuario?');" class="btn"><i class="fas fa-trash fa-lg"></i></button>
                                                 @endcan
                                             </form>
                                         </td>

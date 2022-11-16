@@ -27,15 +27,15 @@
                                     {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">Password</label>
+                                    <label for="">contraseña</label>
                                     {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">Confirm Password</label>
+                                    <label for="">Confirmar contraseña</label>
                                     {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">User Role</label>
+                                    <label for="">Asignar rol</label>
                                     {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
 
                                 </div>

@@ -16,7 +16,7 @@
                 @endcan
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <strong>oops!</strong>Existen algunos problemas con los datos ingresados<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <button type="submit" class="btn btn-dark mt-2">Save</button>
+                                <button type="submit" class="btn btn-dark mt-2">Guardar</button>
                             </div>
                         </div>
                     </div>
