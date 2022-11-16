@@ -17,12 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(["register" => false, 'reset' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::Get('/change-password', 'UserController@changePassword')->name('change.password');
-Route::Post('/update-password', 'UserController@updatePassword')->name('update-password.store');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
+    Route::Get('/change-password', 'UserController@changePassword')->name('change.password');
+    Route::Post('/update-password', 'UserController@updatePassword')->name('update-password.store');
 });
