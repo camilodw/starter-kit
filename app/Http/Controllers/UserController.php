@@ -27,7 +27,6 @@ class UserController extends Controller
         $data = User::orderBy('id', 'DESC')->paginate(5);
         return view('dashboard.users.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
-//        return $roles = auth()->user()->getAllPermissions();
     }
 
     /**
