@@ -24,15 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $role = Role::create(['name' => 'admin']);
-//        $permission = Permission::create(['name' => 'create user']);
-//        $permission = Permission::create(['name' => 'show user']);
-//        $permission = Permission::create(['name' => 'delete user']);
-//        $permission = Permission::create(['name' => 'update user']);
-
-//        $role = Role::find(1);
-//        $permissions = Permission::get();
-//        $role->syncPermissions($permissions);
         return view('home');
     }
 }
