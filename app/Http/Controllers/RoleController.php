@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-
+use App\Http\Requests\Role\UpdateRequest;
 class RoleController extends Controller
 {
     /**
@@ -100,13 +100,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        $this->validate($request, [
-            'name'          => 'required',
-            'permission'    => 'required',
-        ]);
-
         $role       = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
