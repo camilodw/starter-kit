@@ -47,7 +47,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRequest $request) {
-        $input = $request->all();
+        $input = $request->only('password', 'email', 'confirm-password', 'roles', 'name');
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
