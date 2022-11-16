@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+
 class RoleController extends Controller
 {
     /**
@@ -13,13 +15,15 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    function __construct() {
+    function __construct()
+    {
         $this->middleware('permission:create role|show role|edit role|delete role', ['only' => ['index', 'show']]);
         $this->middleware('permission:create role', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit role', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete role', ['only' => ['destroy']]);
     }
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $roles = Role::orderBy('id', 'DESC')->paginate(5);
         return view('dashboard.roles.index', compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -30,7 +34,8 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $permission = Permission::get();
         return view('dashboard.roles.create', compact('permission'));
     }
@@ -41,10 +46,11 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'name'          => 'required|unique:roles,name',
+            'permission'    => 'required',
         ]);
 
         $role = Role::create(['name' => $request->input('name')]);
@@ -59,9 +65,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+    public function show($id)
+    {
+        $role               = Role::find($id);
+        $rolePermissions    = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
             ->where("role_has_permissions.role_id", $id)
             ->get();
 
@@ -74,10 +81,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        $role = Role::find($id);
-        $permission = Permission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+    public function edit($id)
+    {
+        $role               = Role::find($id);
+        $permission         = Permission::get();
+        $rolePermissions    = DB::table("role_has_permissions")
+            ->where("role_has_permissions.role_id", $id)
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
@@ -91,13 +100,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
+            'name'          => 'required',
+            'permission'    => 'required',
         ]);
 
-        $role = Role::find($id);
+        $role       = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
 
@@ -112,7 +122,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         DB::table("roles")->where('id', $id)->delete();
         return redirect()->route('roles.index')
             ->with('success', 'Role deleted successfully');
