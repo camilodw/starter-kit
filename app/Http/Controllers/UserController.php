@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use DB;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use \Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\User\StoreRequest;
 class UserController extends Controller
 {
     /**
@@ -45,14 +46,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required',
-        ]);
-
+    public function store(StoreRequest $request) {
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
@@ -81,9 +75,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-        $userRole = $user->roles->pluck('name', 'name')->all();
+        $user       = User::find($id);
+        $roles      = Role::pluck('name', 'name')->all();
+        $userRole   = $user->roles->pluck('name', 'name')->all();
 
         return view('dashboard.users.edit', compact('user', 'roles', 'userRole'));
     }
@@ -97,10 +91,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id) {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users,email,' . $id,
+            'password'  => 'same:confirm-password',
+            'roles'     => 'required',
         ]);
 
         $input = $request->all();
@@ -117,7 +111,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         $notification = array(
-            'message' => 'User has been updated successfully!',
+            'message' => 'Se actualizó los datos correctamente',
             'alert-type' => 'success',
         );
         return Redirect()->route('users.index')->with($notification);
@@ -140,10 +134,10 @@ class UserController extends Controller
         return view('auth.change-password');
     }
     public function updatePassword(Request $request){
-        $password=Auth::user()->password;
-        $oldpass=$request->oldpass;
-        $newpass=$request->password;
-        $confirm=$request->password_confirmation;
+        $password   = Auth::user()->password;
+        $oldpass    = $request->oldpass;
+        $newpass    = $request->password;
+        $confirm    = $request->password_confirmation;
         if (Hash::check($oldpass,$password)) {
             if ($newpass === $confirm) {
                 $user = User::find(Auth::id());
