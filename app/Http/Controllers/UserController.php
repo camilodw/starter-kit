@@ -29,22 +29,11 @@ class UserController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
         $roles = Role::pluck('name', 'name')->all();
         return view('dashboard.users.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreRequest $request) {
         $input = $request->only('password', 'email', 'confirm-password', 'roles', 'name');
         $input['password'] = Hash::make($input['password']);
@@ -56,22 +45,10 @@ class UserController extends Controller
             ->with('success', 'Usuario creado exitosamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $user) {
         return view('dashboard.users.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user) {
         $roles      = Role::pluck('name', 'name')->all();
         $userRole   = $user->roles->pluck('name', 'name')->all();
@@ -79,13 +56,6 @@ class UserController extends Controller
         return view('dashboard.users.edit', compact('user', 'roles', 'userRole'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id) {
         $this->validate($request, [
             'name'      => 'required',
@@ -111,7 +81,7 @@ class UserController extends Controller
             'message'       => 'Se actualizó los datos correctamente',
             'alert-type'    => 'success',
         );
-        return Redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with($notification);
 
     }
 
@@ -145,20 +115,20 @@ class UserController extends Controller
                     'message'=>'Password Changed Successfully ! Now Login with Your New Password',
                     'alert-type'=>'success'
                 );
-                return Redirect()->route('login')->with($notification);
+                return redirect()->route('login')->with($notification);
             }else{
                 $notification=array(
                     'message'=>'New password and Confirm Password not matched!',
                     'alert-type'=>'error'
                 );
-                return Redirect()->back()->with($notification);
+                return redirect()->back()->with($notification);
             }
         }else{
             $notification=array(
                 'message'=>'Old Password not matched!',
                 'alert-type'=>'error'
             );
-            return Redirect()->back()->with($notification);
+            return redirect()->back()->with($notification);
         }
     }
 }

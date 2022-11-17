@@ -18,7 +18,7 @@
                                 <thead class="table-dark">
                                     <tr>
                                         <th>No</th>
-                                        <th>Name</th>
+                                        <th>Nombre</th>
                                         <th>Email</th>
                                         <th>Roles</th>
                                         <th width="280px">Opciones</th>
