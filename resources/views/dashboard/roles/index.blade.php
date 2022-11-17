@@ -56,7 +56,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    <tr><td>{{$data->links()}}</td></tr>
+                                    <tr><td>{{$roles->links()}}</td></tr>
                                 </tbody>
                             </table>
                         </div>
