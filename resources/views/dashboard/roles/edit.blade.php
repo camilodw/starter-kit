@@ -31,13 +31,13 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Name:</strong>
+                                    <strong>Nombre:</strong>
                                     {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                                 <div class="form-group">
-                                    <strong>Permission:</strong>
+                                    <strong>Permisos:</strong>
                                     <div class="row">
 
                                         @foreach($permission as $value)

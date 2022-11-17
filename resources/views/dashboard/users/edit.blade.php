@@ -19,7 +19,7 @@
                             {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="">Name</label>
+                                    <label for="">Nombre</label>
                                     {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
                                 </div>
                                 <div class="form-group col-md-6">
@@ -27,7 +27,7 @@
                                     {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="">contraseña</label>
+                                    <label for="">Contraseña</label>
                                     {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
                                 </div>
                                 <div class="form-group col-md-6">
