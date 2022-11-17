@@ -60,9 +60,8 @@ class RoleController extends Controller
         return view('dashboard.roles.edit', compact('role', 'permission', 'rolePermissions'));
     }
 
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request,Role $role)
     {
-        $role       = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
 
