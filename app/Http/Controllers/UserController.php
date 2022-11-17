@@ -12,11 +12,6 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\User\StoreRequest;
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     function __construct() {
         $this->middleware('permission:create user|show user|edit user|delete user', ['only' => ['index', 'show']]);
         $this->middleware('permission:create user', ['only' => ['create', 'store']]);
@@ -106,21 +101,21 @@ class UserController extends Controller
                 $user->save();
                 Auth::logout();
                 $notification=array(
-                    'message'=>'Password Changed Successfully ! Now Login with Your New Password',
-                    'alert-type'=>'success'
+                    'message'       =>'Password Changed Successfully ! Now Login with Your New Password',
+                    'alert-type'    =>'success'
                 );
                 return redirect()->route('login')->with($notification);
             }else{
                 $notification=array(
-                    'message'=>'New password and Confirm Password not matched!',
-                    'alert-type'=>'error'
+                    'message'       =>'New password and Confirm Password not matched!',
+                    'alert-type'    =>'error'
                 );
                 return redirect()->back()->with($notification);
             }
         }else{
             $notification=array(
-                'message'=>'Old Password not matched!',
-                'alert-type'=>'error'
+                'message'       =>'Old Password not matched!',
+                'alert-type'    =>'error'
             );
             return redirect()->back()->with($notification);
         }
