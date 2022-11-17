@@ -59,7 +59,7 @@ class UserController extends Controller
             'roles'     => 'required',
         ]);
 
-        $input = $request->all();
+        $input = $request->only('name', 'email', 'password', 'roles');
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         } else {
