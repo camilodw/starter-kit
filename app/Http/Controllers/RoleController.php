@@ -61,11 +61,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        $role               = Role::find($id);
         $rolePermissions    = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
-            ->where("role_has_permissions.role_id", $id)
+            ->where("role_has_permissions.role_id", $role->id)
             ->get();
 
         return view('dashboard.roles.show', compact('role', 'rolePermissions'));
