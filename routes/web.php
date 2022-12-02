@@ -24,6 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
-    Route::Get('/change-password', 'UserController@changePassword')->name('change.password');
+    Route::View('/change-password', 'auth.change-password')->name('change.password');
     Route::Post('/update-password', 'UserController@updatePassword')->name('update-password.store');
 });
